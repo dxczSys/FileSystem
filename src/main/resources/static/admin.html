@@ -33,10 +33,10 @@
             <a href="#download-manager"><span class="glyphicon glyphicon-cloud-download">&nbsp;<b>下载记录</b></span></a>
         </li>
         <li class="jq-nav-item">
-            <a href="#file-manager"><span class="glyphicon glyphicon-file">&nbsp;<b>文件管理</b></span></a>
+            <a href="#file-manager"><span class="glyphicon glyphicon-file">&nbsp;<b>文件权限</b></span></a>
         </li>
         <li class="jq-nav-item">
-            <a href="#auth-manager"><span class="glyphicon glyphicon-lock">&nbsp;<b>权限管理</b></span></a>
+            <a href="#auth-manager"><span class="glyphicon glyphicon-lock">&nbsp;<b>用户权限</b></span></a>
         </li>
         <li class="jq-nav-item">
             <a href="#category-manager"><span class="glyphicon glyphicon-filter">&nbsp;<b>分类管理</b></span></a>
@@ -59,16 +59,15 @@
     <div class="row jq-tab" id="upload-manager">
         <file-filter-item></file-filter-item>
         <div class="col-12 col-sm-10 offset-sm-1 content-box rounded">
-            <table class="table table-bordered table-hover table-responsive table-condensed table-striped">
+            <table class="table table-striped table-hover text-center">
                 <thead>
                 <tr>
-                    <th class="text-center">编号</th>
-                    <th class="text-center">用户名</th>
-                    <th class="text-center">邮箱</th>
-                    <th class="text-center">文件路径</th>
-                    <th class="text-center">分类名</th>
-                    <th class="text-center">链接</th>
-                    <th class="text-center">上传时间</th>
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>邮箱</th>
+                    <th>分类名</th>
+                    <th>链接</th>
+                    <th>上传时间</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,11 +75,8 @@
                     <td>{{key+1}}</td>
                     <td>{{upload.username}}</td>
                     <td>{{upload.email}}</td>
-                    <td class="text-center"><a href="javascript:" onclick="alerts($(event.srcElement).attr('data-title'));"
-                           v-bind:title="upload.localUrl" data-toggle="tooltip"
-                           v-bind:data-title="upload.localUrl">查看</a></td>
                     <td>{{upload.categoryName}}</td>
-                    <td class="text-center"><a v-bind:href="upload.visitUrl" target="_blank">访问</a></td>
+                    <td><a v-bind:href="upload.visitUrl" target="_blank">下载</a></td>
                     <td>{{new Date(upload.createTime).format('yyyy-MM-dd hh:mm:ss')}}</td>
                 </tr>
                 </tbody>
@@ -96,8 +92,7 @@
         <file-filter-item></file-filter-item>
         <div class="col-12 col-sm-10 offset-sm-1"><br/></div>
         <div class="col-12 col-sm-10 offset-sm-1 content-box rounded">
-            <br/>
-            <table class="table table-bordered table-hover table-responsive table-condensed">
+            <table class="table table-striped table-hover text-center">
                 <thead>
                 <tr>
                     <th>编号</th>
@@ -120,7 +115,7 @@
                     <td>{{download.email}}</td>
                     <td>{{download.fileName}}</td>
                     <td>{{download.categoryName}}</td>
-                    <td><a v-bind:href="download.visitUrl" target="_blank">访问</a></td>
+                    <td><a v-bind:href="download.visitUrl" target="_blank">下载</a></td>
                     <td>{{new Date(download.createTime).format('yyyy-MM-dd hh:mm:ss')}}</td>
                 </tr>
                 </tbody>
@@ -138,22 +133,22 @@
         <div class="col-12 col-sm-10 offset-sm-1 content-box rounded">
             <br/>
             <div class="text-right">
-                <button class="btn btn-primary" onclick="showFileShareModal();"><i
+                <!-- <button class="btn btn-primary" onclick="showFileShareModal();"><i
                         class="glyphicon glyphicon-share"></i> 共享
-                </button>
-                <button class="btn btn-success to-upload-button"><i
+                </button> -->
+                <!-- <button class="btn btn-success to-upload-button"><i
                         class="glyphicon glyphicon-cloud-upload"></i> 上传
                 </button>
                 <button class="btn btn-warning" onclick="showFileModal('#file-manager-table','#fileModifiedModal');"><i
                         class="glyphicon glyphicon-wrench"></i> 修改
-                </button>
+                </button> -->
                 <button class="btn btn-dark" onclick="showFileModal('#file-manager-table','#fileAuthModal');"><i
                         class="glyphicon glyphicon-eye-close"></i> 权限
                 </button>
                 <button class="btn btn-danger file-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
             </div>
             <br/>
-            <table class="table table-bordered table-hover table-responsive table-condensed" id="file-manager-table">
+            <table class="table table-striped table-hover text-center" id="file-manager-table">
                 <thead>
                 <tr>
                     <th>
@@ -166,9 +161,7 @@
                         </div>
                     </th>
                     <th>编号</th>
-                    <th>文件编号</th>
                     <th>用户名</th>
-                    <th>本地路径</th>
                     <th>分类</th>
                     <th>链接</th>
                     <th>下载次数</th>
@@ -186,13 +179,9 @@
                         </div>
                     </td>
                     <td class="file-index" v-bind:data-key="key">{{key+1}}</td>
-                    <td>{{file.id}}</td>
                     <td>{{file.username}}</td>
-                    <td><a href="javascript:" onclick="alerts($(event.srcElement).attr('data-title'));"
-                           v-bind:title="file.localUrl" data-toggle="tooltip"
-                           v-bind:data-title="file.localUrl">查看</a></td>
                     <td>{{file.categoryName}}</td>
-                    <td><a v-bind:href="file.visitUrl" target="_blank">访问</a></td>
+                    <td><a v-bind:href="file.visitUrl" target="_blank">下载</a></td>
                     <td>{{file.downloadTimes}}</td>
                     <td>{{new Date(file.createTime).format('yyyy-MM-dd hh:mm:ss')}}</td>
                 </tr>
@@ -224,16 +213,13 @@
         <div class="col-12 col-sm-10 offset-sm-1 content-box rounded">
             <br/>
             <div class="text-right">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#authAddedModal"
-                        onclick="authFileSearch='';"><i class="glyphicon glyphicon-flash"></i> 新增
-                </button>
                 <button class="btn btn-success" onclick="showFileModal('#auth-manager-table','#authEditModal');"><i
                         class="glyphicon glyphicon-edit"></i> 编辑
                 </button>
                 <button class="btn btn-danger auth-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
             </div>
             <br/>
-            <table class="table table-bordered table-hover table-responsive table-condensed" id="auth-manager-table">
+            <table class="table table-striped table-hover text-center" id="auth-manager-table">
                 <thead>
                 <tr>
                     <th>
@@ -248,7 +234,6 @@
                     <th>编号</th>
                     <th>用户名</th>
                     <th>文件名</th>
-                    <th>本地路径</th>
                     <th>下载权限</th>
                     <th>删除权限</th>
                     <th>修改权限</th>
@@ -269,9 +254,6 @@
                     <td class="auth-index" v-bind:data-key="key">{{key+1}}</td>
                     <td>{{auth.username}}</td>
                     <td>{{auth.fileName}}</td>
-                    <td><a href="javascript:" onclick="alerts($(event.srcElement).attr('data-title'));"
-                           v-bind:title="auth.localUrl" data-toggle="tooltip"
-                           v-bind:data-title="auth.localUrl">查看</a></td>
                     <td class="text-center" v-html="getIconYesOrNo(auth.isDownloadable)"></td>
                     <td class="text-center" v-html="getIconYesOrNo(auth.isDeletable)"></td>
                     <td class="text-center" v-html="getIconYesOrNo(auth.isUpdatable)"></td>
@@ -303,7 +285,7 @@
         </div>
         <div class="col-sm-6 offset-sm-1 col-12 content-box rounded">
             <br/>
-            <table class="table table-bordered table-hover table-responsive table-condensed">
+            <table class="table table-striped table-hover text-center">
                 <thead>
                 <tr>
                     <th>编号</th>
@@ -355,7 +337,7 @@
                 </button>
             </div>
             <br/>
-            <table class="table table-bordered table-hover table-responsive table-condensed" id="user-manager-table">
+            <table class="table table-striped table-hover text-center" id="user-manager-table">
                 <thead>
                 <tr>
                     <th>
@@ -442,7 +424,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-12 col-12">
-                        <input title="用户名" type="text" class="form-control username"
+                        <input title="用户名" type="text" class="form-control username" readonly="readonly"
                                data-toggle="tooltip"/>
                     </div>
                 </div>
@@ -458,12 +440,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-secondary" onclick="rowIndex-=1;setUsername('#userAuthModal','auth');"><i
-                        class="glyphicon glyphicon-arrow-left"></i> 上个
-                </button>
-                <button class="btn btn-outline-primary" onclick="rowIndex+=1;setUsername('#userAuthModal','auth');">下个
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                </button>
                 <button type="button" class="btn btn-info" data-dismiss="modal"><i
                         class="glyphicon glyphicon-remove"></i> 关闭
                 </button>
@@ -530,7 +506,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-12 col-12">
-                        <input title="用户名" type="text" class="form-control username"
+                        <input title="用户名" type="text" class="form-control username" readonly="readonly"
                                data-toggle="tooltip"/>
                     </div>
                 </div>
@@ -555,12 +531,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-secondary" onclick="rowIndex-=1;setUserFileAuth();"><i
-                        class="glyphicon glyphicon-arrow-left"></i> 上个
-                </button>
-                <button class="btn btn-outline-primary" onclick="rowIndex+=1;setUserFileAuth();">下个 <i
-                        class="glyphicon glyphicon-arrow-right"></i>
-                </button>
                 <button type="button" class="btn btn-info" data-dismiss="modal"><i
                         class="glyphicon glyphicon-remove"></i> 关闭
                 </button>
@@ -676,6 +646,8 @@
         </div>
     </div>
 </div>
+
+
 <!--文件权限模态框-->
 <div class="modal fade" id="fileAuthModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel"
      aria-hidden="true">
@@ -689,7 +661,7 @@
                 <input type="hidden" class="form-control" id="file-auth-id" value="0">
                 <div class="row">
                     <div class="col-sm-12 col-12">
-                        <input title="文件本地路径" type="text" class="form-control" id="file-local-url"
+                        <input title="文件本地路径" type="text" class="form-control" id="file-local-url" readonly="readonly"
                                data-toggle="tooltip"/>
                     </div>
                 </div>
@@ -714,12 +686,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-secondary" onclick="rowIndex-=1;setFileAuth();"><i
-                        class="glyphicon glyphicon-arrow-left"></i> 上个
-                </button>
-                <button class="btn btn-outline-primary" onclick="rowIndex+=1;setFileAuth();">下个 <i
-                        class="glyphicon glyphicon-arrow-right"></i>
-                </button>
                 <button type="button" class="btn btn-info" data-dismiss="modal"><i
                         class="glyphicon glyphicon-remove"></i> 关闭
                 </button>
@@ -731,6 +697,8 @@
         </div>
     </div>
 </div>
+
+
 <!--权限编辑模态框-->
 <div class="modal fade" id="authEditModal" tabindex="-1" role="dialog" aria-labelledby="authEditModalLabel"
      aria-hidden="true">
@@ -744,14 +712,14 @@
                 <input type="hidden" class="form-control" id="auth-id" value="0">
                 <div class="row">
                     <div class="col-sm-12 col-12">
-                        <input title="用户名" type="text" class="form-control" id="auth-username"
+                        <input title="用户名" type="text" class="form-control" id="auth-username" readonly="readonly"
                                data-toggle="tooltip"/>
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="col-sm-12 col-12">
-                        <input title="文件本地路径" type="text" class="form-control" id="auth-file-local-url"
+                        <input title="文件本地路径" type="text" class="form-control" id="auth-file-local-url" readonly="readonly"
                                data-toggle="tooltip"/>
                     </div>
                 </div>
@@ -776,12 +744,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-secondary" onclick="rowIndex-=1;setAuth();"><i
-                        class="glyphicon glyphicon-arrow-left"></i> 上个
-                </button>
-                <button class="btn btn-outline-primary" onclick="rowIndex+=1;setAuth();">下个 <i
-                        class="glyphicon glyphicon-arrow-right"></i>
-                </button>
                 <button type="button" class="btn btn-info" data-dismiss="modal"><i
                         class="glyphicon glyphicon-remove"></i> 关闭
                 </button>

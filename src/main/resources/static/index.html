@@ -44,6 +44,9 @@
                 <a class="nav-link" data-toggle="pill" href="#uploadfile-tab">文件分享</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="userFileManager.html" target="_blank">文件管理</a>
+            </li>
+            <li class="nav-item">
          		<input class="form-control bg-dark text-white form-control-sm" type="search" style="line-height:25px;margin-left:10px;width:200px;"
                		placeholder="搜索" id="search"/>
             </li>
@@ -54,7 +57,7 @@
         	<img src="../assets/img/default-user.jpg" id="avatar" class="rounded-circle header-avatar"/>
         	<span style="color:#007bff;padding:0 5px;">{{username}}</span>
         </div>
-    	<img alt="退出" src="../assets/img/close.png" style="width:28px;">
+    	<img alt="退出" src="../assets/img/close.png" onclick="logOutmy()" style="width:28px;">
     </div>
     <!-- <div class="form-inline w-50">
         <input class="form-control border-dark bg-dark text-white form-control-sm w-100" type="search"

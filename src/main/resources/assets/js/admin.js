@@ -65,7 +65,7 @@ var authModal = new Vue({
                     layer.closeAll();
                     var json = JSON.parse(data);
                     if (json.length < 1) {
-                        alerts("糟糕，没有数据了");
+                        alerts("已经到底了！");
                     } else {
                         var ele = $("#auth-user-list-group");
                         $(ele).empty();
@@ -524,7 +524,11 @@ function updateAuth(url, down, uplo, dele, upda, visi, key) {
         url: url, type: "PUT", data: {auth: auth}, success: function (data) {
             layer.closeAll();
             var result = data.indexOf("success") > 0;
-            alerts("更新" + boolToChinese(result));
+            $('#fileAuthModal').modal('hide')
+            $('#authEditModal').modal('hide')
+            $('#userFileAuthModal').modal('hide')
+            layer.msg(`更新${boolToChinese(result)}`)
+//            alerts("更新" + boolToChinese(result));
             if (result) {
                 if (url.indexOf("auth") === 1) {
                     app.auths[key].isDownloadable = down;

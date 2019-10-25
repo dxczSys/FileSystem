@@ -250,4 +250,9 @@ public class UserController {
         return Checker.checkNull(code).equals(String.valueOf(request.getSession().getAttribute(DefaultValues
                 .CODE_STRING)));
     }
+    
+    @RequestMapping(value="/logout")
+    public void logOut(HttpServletRequest httpServletRequest) {
+    	httpServletRequest.getSession().removeAttribute(ValueConsts.USER_STRING);
+    }
 }

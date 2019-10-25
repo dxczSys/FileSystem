@@ -32,6 +32,17 @@ function getPage() {
     }
 }
 
+
+function logOutmy() {
+	$.ajax({
+        url: "/user/logout",
+        type: "get",
+        success: function (data) {
+        	location.href = "/signin.html#login";
+        }
+    });
+}
+
 /**
  * 保存用户信息
  */
@@ -206,7 +217,9 @@ function logoLink() {
 }
 
 function getTabContent(href) {
+	
 	$('#bio-tab').hide()
+	$('#resource-tab').hide()
     if (href.startsWith("uploaded", 1)) {
         offset = 0;
         window.location.hash = "uploaded";
@@ -218,9 +231,12 @@ function getTabContent(href) {
     } else if (href.startsWith("bio", 1)) {
         window.location.hash = "bio";
         getUserInfo();
-    } else {
-        offset = 0;
+    } else if (href.startsWith("#uploadfile")) {
+        
+    }else {
+    	offset = 0;
         window.location.hash = "resource";
+        $('#resource-tab').show()
         getResource("");
     }
 }
